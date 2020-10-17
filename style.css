@@ -22,13 +22,28 @@
   padding-right: 10%;
 }
 
+.input-group{
+  padding: 3px;
+}
+
+.enter{
+  border: solid 2px black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 body{
   background-image: url("paper-background.jpg");
+  padding-bottom: 60px;
+}
+
+.jumbotron, .bg-light{
+  background-image: url("marble-background.jpg");
 }
 
 .info{
   background: #0002;
-  border-radius: 35px;
+  border-radius: 15px;
   padding: 5px;
 }
 

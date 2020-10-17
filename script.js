@@ -85,7 +85,32 @@ document.getElementById("civbtn").addEventListener("click",function(event){
       let results = "";
       results += "<h3 class='centered col-md-12'>" + json.name + "</h3>";
       //Build CivBtn Response
-      document.getElementById("layout").innerHTML = results;
+      results += "<div class='ml-auto mr-auto name'>";
+      results += "<p class='centered'>Preferred Army Type: " + json.army_type + "</p>";
+      results += "<p class='centered'><strong>Civilization Bonuses:</strong> <br>";
+      for(var i = 0; i < json.civilization_bonus.length; i++){
+        results += json.civilization_bonus[i];
+        if(i < json.civilization_bonus.length-1){
+          results += "<br>";
+        }
+      }
+      results += "<p class='centered'><strong>Team Bonus:</strong><br>" + json.team_bonus + "</p>";
+      fetch(proxyurl+json.unique_unit[0])
+        .then(function(response){
+          return response.json();
+        }).then(function(json2){
+          console.log(json2);
+          results += "<p class='centered'><strong>Unique Unit:</strong><br>" + json2.name + "</p>";
+          fetch(proxyurl+json.unique_tech[0])
+            .then(function(response){
+              return response.json();
+            }).then(function(json3){
+              console.log(json3);
+              results += "<p class='centered'><strong>Unique Technology:</strong><br>" + json3.name + "</p>";
+              results += "</div>";
+              document.getElementById("layout").innerHTML = results;
+            })
+        })
     })
 });
 
