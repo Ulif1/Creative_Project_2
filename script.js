@@ -83,7 +83,7 @@ document.getElementById("civbtn").addEventListener("click",function(event){
     }).then(function(json){
       console.log(json);
       let results = "";
-      results += "<h3 class='centered col-md-12'>" + value + "</h3>";
+      results += "<h3 class='centered col-md-12'>" + json.name + "</h3>";
       //Build CivBtn Response
       document.getElementById("layout").innerHTML = results;
     })
@@ -102,15 +102,38 @@ document.getElementById("unitbtn").addEventListener("click",function(event){
     }).then(function(json){
       console.log(json);
       let results = "";
+      var building = "";
       results += "<h3 class='centered col-md-12'>" + value + "</h3>";
+      results += "<div class='ml-auto mr-auto name centered'>";
       //Build UnitBtn Response
-      if(json.cost.Food > 1){
-        results += "<p>" + json.cost.Food + " Wood</p>";
-      }
-      if(json.cost.Gold > 1){
-        results += "<p>" + json.cost.Gold + " Wood</p>";
-      }
-      document.getElementById("layout").innerHTML = results;
+      fetch(proxyurl+json.created_in)
+        .then(function(response){
+          return response.json();
+        }).then(function(json2){
+          console.log(json2);
+          if(json2.length >= 1){
+            building = json2[0].name;
+          }else{
+            building = json2.name;
+          }
+        }).then(function(event){
+          results += "<div class='container centered'>";
+          results += "<p class='centered squish'>" + json.description + ", created at the " + building + "</p>";
+          results += "</div>";
+          if(json.cost.Food > 1){
+            results += "<p class='centered'>" + json.cost.Food + " Food</p>";
+          }
+          if(json.cost.Gold > 1){
+            results += "<p class='centered'>" + json.cost.Gold + " Gold</p>";
+          }
+          if(json.cost.Wood > 1){
+            results += "<p class='centered'>" + json.cost.Wood + " Wood</p>";
+          }
+          results += "<p class='centered'>Armor: " + json.armor + "</p>";
+          results += "<p class='centered'>Hitpoints: " + json.hit_points + "</p>";
+          results += "</div>";
+          document.getElementById("layout").innerHTML = results;
+        })
     })
 });
 
@@ -121,6 +144,7 @@ document.getElementById("techbtn").addEventListener("click",function(event){
     return;
   let proxyurl = 'https://cors-anywhere.herokuapp.com/';
   const url = "https://age-of-empires-2-api.herokuapp.com/api/v1/technology/" + value;
+  var building = "";
   fetch(proxyurl+url)
     .then(function(response){
       return response.json();
@@ -128,8 +152,35 @@ document.getElementById("techbtn").addEventListener("click",function(event){
       console.log(json);
       let results = "";
       results += "<h3 class='centered col-md-12'>" + value + "</h3>";
-      //Build TechBtn Response
-      document.getElementById("layout").innerHTML = results;
+      results += "<div class='ml-auto mr-auto name'>";
+      fetch(proxyurl+json.develops_in)
+        .then(function(response){
+          return response.json();
+        }).then(function(json2){
+          console.log(json2);
+          if(json2.length >= 1){
+            building = json2[0].name;
+          }else{
+            building = json2.name;
+          }
+        }).then(function(event){
+          results += "<p class='centered'>Technology available at " + building + " starting in the " + json.age + " Age.</p>";
+          results += "<p class='centered'>Description: " + json.description + "</p>";
+          if(json.cost.Food > 1){
+            results += "<p class='centered'>" + json.cost.Food + " Wood</p>";
+          }
+          if(json.cost.Wood > 1){
+            results += "<p class='centered'>" + json.cost.Wood + " Wood</p>";
+          }
+          if(json.cost.Gold > 1){
+            results += "<p class='centered'>" + json.cost.Gold + " Gold</p>";
+          }
+          if(json.cost.Stone > 1){
+            results += "<p class='centered'>" + json.cost.Stone + " Stone</p>";
+          }
+          results += "</div>";
+          document.getElementById("layout").innerHTML = results;
+        })
     })
 });
 
@@ -160,16 +211,16 @@ document.getElementById("builbtn").addEventListener("click",function(event){
         results += "<div class='ml-auto mr-auto name'>";
         results += "<p>Available starting in " + json.age + " Age</p>";
         if(json.cost.Wood > 1){
-          results += "<p>" + json.cost.Wood + " Wood</p>";
+          results += "<p class='centered'>" + json.cost.Wood + " Wood</p>";
         }
         if(json.cost.Gold > 1){
-          results += "<p>" + json.cost.Gold + " Gold</p>";
+          results += "<p class='centered'>" + json.cost.Gold + " Gold</p>";
         }
         if(json.cost.Stone > 1){
-          results += "<p>" + json.cost.Stone + " Stone</p>";
+          results += "<p class='centered'>" + json.cost.Stone + " Stone</p>";
         }
-        results += "<p>Armor: " + json.armor + "</p>";
-        results += "<p>Hitpoints: " + json.hit_points + "</p>";
+        results += "<p class='centered'>Armor: " + json.armor + "</p>";
+        results += "<p class='centered'>Hitpoints: " + json.hit_points + "</p>";
         results += "</div>";
       }
       document.getElementById("layout").innerHTML = results;

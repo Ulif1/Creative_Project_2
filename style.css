@@ -10,6 +10,16 @@
 
 .btn{
   margin: 3px;
+  transition: 0.3s;
+}
+
+.btn:hover{
+  transform: scale(1.05,1.05);
+}
+
+.squish{
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 body{
