@@ -12,15 +12,44 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
   integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="style.css" />
-  <script src="script.js"></script>
+
 
 </head>
 <body>
-  <div class="jumbotron">
-    <h1>Age of Empires 2 Statistics</h1>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="centered">Age of Empires 2 Statistics</h1>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-12 centered">
+        <button id="allciv" class="btn btn-primary">List all Civilizations</button>
+        <button id="allunit" class="btn btn-primary">List all Units</button>
+        <button id="alltech" class="btn btn-primary">List all Technologies</button>
+        <button id="allbuil" class="btn btn-primary">List all Buildings</button>
+      </div>
+      <form class="form">
+        <div class="form-group">
+          <input id="civ" placeholder="Enter Civilization"></input>
+          <button id="civbtn" class="btn btn-primary">Search</button>
+        </div>
+        <div class="form-group">
+          <input id="unit" placeholder="Enter Unit"></input>
+          <button id="unitbtn" class="btn btn-primary">Search</button>
+        </div>
+        <div class="form-group">
+          <input id="tech" placeholder="Enter Technology"></input>
+          <button id="techbtn" class="btn btn-primary">Search</button>
+        </div>
+        <div class="form-group">
+          <input id="buil" placeholder="Enter Building"></input>
+          <button id="builbtn" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+      <div class="" id="layout">
+        <h3>Filler Text</h3>
+      </div>
+    </div>
   </div>
-  <form class="form">
-    <label>Search</label>
-  </form>
+  <script src="script.js"></script>
 </body>
 </html>
