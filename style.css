@@ -8,14 +8,20 @@
   text-align: center;
 }
 
-.content{
-  width: 5%;
-}
-
 .btn{
   margin: 3px;
 }
 
 body{
   background-image: url("paper-background.jpg");
+}
+
+.info{
+  background: #0002;
+  border-radius: 35px;
+  padding: 5px;
+}
+
+.name{
+  font-size: 1.2em;
 }
